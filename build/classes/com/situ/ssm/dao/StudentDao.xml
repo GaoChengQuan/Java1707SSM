@@ -7,8 +7,34 @@
   		<select id="findAll" resultType="Student">
   			select * from student
   		</select>
+  		
+  		<insert id="add" parameterType="Student">
+  			insert into student(name,age,gender,address) values(#{name},#{age},#{gender},#{address});
+  		</insert>
+  		
+  		<!-- <resultMap type="Student" id="studentMap">
+  			<id column="id" property="id"/>
+  			<result column="name" property="name"/>
+  			<association property="banji" javaType="Banji">
+	  			<result column="banji_name" property="name"/>
+  				<collection property="courseList" ofType="Course">
+		  			<result column="course_name" property="name"/>
+  				</collection>
+  			</association>
+  		</resultMap>
+
+		<select id="findAll" resultMap="studentMap">
+			SELECT s.id,s.name,b.name as banji_name,c.name as course_name
+			FROM student AS s INNER JOIN banji AS b ON s.banji_id=b.id
+			INNER JOIN banji_course AS bc ON b.id=bc.banji_id
+			INNER JOIN course AS c ON bc.course_id=c.id;
+		</select> -->
 		
 		<delete id="deletById" parameterType="int">
 			delete from student where id=#{id}
-		</delete>	  
+		</delete>	 
+		
+		<select id="findById" parameterType="int" resultType="Student">
+			select * from student where id=#{id}
+		</select> 
   </mapper>

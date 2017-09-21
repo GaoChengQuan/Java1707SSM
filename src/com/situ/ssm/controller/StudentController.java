@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.situ.ssm.pojo.Student;
 import com.situ.ssm.service.IStudentService;
+import com.situ.ssm.service.impl.StudentServiceImpl;
 
 @Controller
 @RequestMapping("/student")

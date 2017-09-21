@@ -8,4 +8,7 @@ public interface IStudentService {
 	List<Student> findAll();
 
 	void deletById(int id);
+	Student findById(int id);
+
+	void add(Student student);
 }
