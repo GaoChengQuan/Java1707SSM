@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.websocket.server.PathParam;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,7 @@ import com.situ.ssm.service.IStudentService;
 
 @Controller
 public class StuController {
-	@Resource(name="studentService")
+	@Autowired
 	private IStudentService studentService;
 
 	@RequestMapping(value="/stus/", method = RequestMethod.GET)

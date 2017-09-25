@@ -4,15 +4,17 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.situ.ssm.dao.StudentDao;
 import com.situ.ssm.pojo.Student;
 import com.situ.ssm.service.IStudentService;
 
-@Service("studentService")
+@Service
 public class StudentServiceImpl implements IStudentService{
-	@Resource(name="studentDao")
+	@Autowired
 	private StudentDao studentDao;
 	
 	@Override
@@ -33,6 +35,11 @@ public class StudentServiceImpl implements IStudentService{
 	@Override
 	public void add(Student student) {
 		studentDao.add(student);
+	}
+
+	@Override
+	public void update(Student student) {
+		studentDao.update(student);
 	}
 
 }

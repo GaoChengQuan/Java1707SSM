@@ -8,9 +8,9 @@
   			select * from student
   		</select>
   		
-  		<insert id="add" parameterType="Student">
-  			insert into student(name,age,gender,address) values(#{name},#{age},#{gender},#{address});
-  		</insert>
+		<insert id="add" parameterType="Student">
+			insert into student(name,age,gender,address,birthday,banji_id) values(#{name},#{age},#{gender},#{address},#{birthday},#{banji.id});
+		</insert>
   		
   		<!-- <resultMap type="Student" id="studentMap">
   			<id column="id" property="id"/>
@@ -37,4 +37,26 @@
 		<select id="findById" parameterType="int" resultType="Student">
 			select * from student where id=#{id}
 		</select> 
+		
+		<update id="update" parameterType="Student">
+  			update student
+  			<set>
+  				<if test="name!=null and name!='' ">
+  					name=#{name},
+  				</if>
+  				<if test="age!=null and age!=0 ">
+  					age=#{age},
+  				</if>
+  				<if test="gender!=null and gender!='' ">
+  					gender=#{gender},
+  				</if>
+  				<if test="address!=null and address!='' ">
+  					address=#{address},
+  				</if>
+  				<if test="birthday!=null and birthday!='' ">
+  					birthday=#{birthday},
+  				</if>
+  			</set>
+  			where id=#{id}
+  		</update>
   </mapper>

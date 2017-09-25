@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.situ.ssm.dao.BanjiCourseDao">
+ 		<resultMap type="BanjiCourse" id="banjiCourseMap">
+ 			<id column="id" property="id"/>
+ 			<association property="banji" javaType="Banji">
+ 				<result property="name" column="banji_nanme"/>
+ 			</association>
+ 			<association property="course" javaType="Course">
+ 				<result property="name" column="course_name"/>
+ 			</association>
+ 		</resultMap>
+ 		<select id="findAll" resultMap="banjiCourseMap">
+ 			SELECT b.name as banji_nanme,bc.id,c.name as course_name,c.credit
+		FROM banji AS b INNER JOIN banji_course AS bc ON b.id=bc.banji_id
+		INNER JOIN course AS c ON bc.course_id=c.id;
+ 		</select>
+ </mapper>

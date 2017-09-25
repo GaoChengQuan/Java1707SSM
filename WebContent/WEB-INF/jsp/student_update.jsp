@@ -3,7 +3,7 @@
 <%@page import="com.situ.ssm.pojo.*"%>
 <%@page import="java.util.*"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>   
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,14 +11,6 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.css" />
-<script type="text/javascript">
-	function del(id){
-		var isDel = confirm("您确认要删除么");
-		if(isDel) {
-			location.href="/ShiXun09/student?method=deleteById&id="+id;
-		}
-	}
-</script>
 </head>
 <body>
 	<!-- 顶部导航条 begin -->
@@ -57,50 +49,52 @@
 			<!--左边列表占12份中的2份-->
 			<div class="col-md-2">
 				<div class="list-group">
-				  <a href="/ShiXun09/student?method=findAll" class="list-group-item active">学生管理</a>
+				   <a href="/ShiXun09/student?method=findAll" class="list-group-item">学生管理</a>
 				  <a href="student_search.jsp" class="list-group-item">学生搜索</a>
-				  <a href="${pageContext.request.contextPath}/student/getAddPage.action" class="list-group-item">添加学生</a>
+				  <a href="/ShiXun09/student?method=getAddPage" class="list-group-item  active">添加学生</a>
 				</div>
 			</div>
 			<!--左边列表占12份中的10份-->
 			<div class="col-md-10">
 				<ul class="nav nav-tabs">
-				  <li role="presentation" class="active"><a href="/ShiXun09/student?method=findAll">学生管理</a></li>
+				  <li role="presentation" ><a href="/ShiXun09/student?method=findAll">学生管理</a></li>
 				  <li role="presentation"><a href="student_search.jsp">学生搜索</a></li>
-				  <li role="presentation"><a href="/ShiXun09/student?method=getAddPage">添加学生</a></li>
+				  <li role="presentation" class="active"><a href="/ShiXun09/student?method=getAddPage">添加学生</a></li>
 				</ul>
 				
-				<table class="table  table-condensed table-hover">
-					<thead>
-						<tr>
-							<th>id</th>
-							<th>姓名</th>
-							<th>年龄</th>
-							<th>性别</th>
-							<th>地址</th>
-							<th>出生日期</th>
-							<th>删除</th>
-							<th>修改</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${list}" var="student">
-							<tr>
-								<td>${student.getId()}</td>
-								<td>${student.getName()}</td>
-								<td>${student.getAge()}</td>
-								<td>${student.getGender()}</td>
-								<td>${student.getAddress()}</td>
-								<td><fmt:formatDate value="${student.birthday}" pattern="yyyy-MM-dd"/></td>
-								
-								<td><a
-									href="${pageContext.request.contextPath}/student/deletById.action?id=${student.getId()}">删除</a></td>
-								<td><a
-								href="${pageContext.request.contextPath}/student/toUpdate.action?id=${student.getId()}">修改</a></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+				<form action="${pageContext.request.contextPath}/student/add.action" method="post">
+					<input type="hidden" value="${student.id}"/>
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">姓名</label>
+				    <input name="name" value="${student.name}" class="form-control" id="exampleInputEmail1">
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">年龄</label>
+				    <input name="age"  value="${student.age}" class="form-control" id="exampleInputEmail1">
+				  </div>
+				   <div class="form-group">
+				    <label for="exampleInputEmail1">性别</label>
+				    <input name="gender" value="${student.gender}"  class="form-control" id="exampleInputEmail1">
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">地址</label>
+				    <input name="address" value="${student.address}"  class="form-control" id="exampleInputEmail1">
+				  </div>
+				  <div class="form-group">
+				    <label>出生日期</label>
+				    <input name="birthday" value="<fmt:formatDate value='${student.birthday}' pattern='yyyy-MM-dd'/>"  class="form-control" >
+				  </div>
+				  <div  class="form-group">
+				  	<label >选择班级</label>
+				  	<select name="banji.id" class="form-control">
+				  		<c:forEach items="${banjiList}" var="banji">
+				  			<option value="${banji.id}">${banji.name}</option>
+				  		</c:forEach>
+				  	</select>
+				  </div>
+				  
+				  <button type="submit" class="btn btn-default">Submit</button>
+				</form>
 				
 			</div>
 		</div>

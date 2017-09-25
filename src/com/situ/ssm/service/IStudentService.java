@@ -11,4 +11,6 @@ public interface IStudentService {
 	Student findById(int id);
 
 	void add(Student student);
+
+	void update(Student student);
 }
