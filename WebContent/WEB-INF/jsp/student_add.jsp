@@ -8,8 +8,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/jquery/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/jquery/jquery.form.js"></script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.css" />
+	<script type="text/javascript">
+		function uploadPic(){
+			//定义参数
+			var options = {
+					url : "${pageContext.request.contextPath}/upload/uploadPic.action",
+					dataType : "json",
+					type : "post",
+					success : function(data) {
+						$("#imgId").attr("src", "/pic/" + data.fileName);
+					}
+			};
+			
+			 $("#form-add").ajaxSubmit(options);
+		}
+	</script>
 </head>
 <body>
 	<!-- 顶部导航条 begin -->
@@ -61,7 +78,7 @@
 				  <li role="presentation" class="active"><a href="/ShiXun09/student?method=getAddPage">添加学生</a></li>
 				</ul>
 				
-				<form action="${pageContext.request.contextPath}/student/add.action" method="post">
+				<form id="form-add" action="${pageContext.request.contextPath}/student/add.action" enctype="multipart/form-data" method="post">
 				  <div class="form-group">
 				    <label for="exampleInputEmail1">姓名</label>
 				    <input name="name" class="form-control" id="exampleInputEmail1">
@@ -89,6 +106,11 @@
 				  			<option value="${banji.id}">${banji.name}</option>
 				  		</c:forEach>
 				  	</select>
+				  </div>
+				  <div  class="form-group">
+				  	<label >上传头像</label>
+				  	<img alt="" id="imgId" src="" width="100" height="100">
+				  	<input type="file" name="pictureFile" onchange="uploadPic();"/>
 				  </div>
 				  
 				  <button type="submit" class="btn btn-default">Submit</button>
