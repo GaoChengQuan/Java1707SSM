@@ -15,6 +15,8 @@ import com.situ.ssm.service.IBanjiCourseService;
 public class BanjiCourseController {
 	@Autowired
 	private IBanjiCourseService banjiCourseService;
+	private IBanjiCourseService banjiCourseService;
+	private IBanjiCourseService banjiCourseService;
 
 	@RequestMapping("/findAll")
 	public @ResponseBody List<BanjiCourse> findAll() {
